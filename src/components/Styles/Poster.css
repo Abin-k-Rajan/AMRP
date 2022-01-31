@@ -1,0 +1,15 @@
+.img-fluid-1 {
+    height: 100%;
+}
+
+.p-tag {
+    color: white;
+}
+
+.del-button-hide{
+    display: none;
+}
+
+.del-button-show {
+    color: blue;
+}

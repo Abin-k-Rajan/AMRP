@@ -1,0 +1,5 @@
+.nav-bar {
+    z-index: 999;
+    mask: linear-gradient(black, black, transparent);
+    backdrop-filter: blur(5px) brightness(60%);
+}
