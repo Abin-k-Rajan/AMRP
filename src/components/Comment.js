@@ -33,7 +33,9 @@ class Comment extends Component
       }).then(res => {
           localStorage.setItem('comment-changed', JSON.stringify(res))
           this.setState({newComment: true})
-          window.location.reload()
+
+          //  HAVE TO LOAD COMMENT WITHOUT RELOAD
+          //window.location.reload()
       }).catch(err => {
           alert(err)
       })
