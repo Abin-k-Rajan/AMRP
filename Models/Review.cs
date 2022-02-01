@@ -8,6 +8,7 @@ namespace AMRP.Models
         public int id {get; set;}
         public int movieId {get; set;}
         public int userId {get; set;}
+        [StringLength(maximumLength: 20)]
         public string userName {get; set;}
         public string comment {get; set;}
         public int rating {get; set;}

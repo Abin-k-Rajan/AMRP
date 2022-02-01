@@ -9,6 +9,8 @@ namespace AMRP.Models
         public int crewId {get; set;}
         public int actorId {get; set;}
         public string description {get; set;}
+        [Required]
+        [StringLength(maximumLength: 20)]
         public string character {get; set;}
     }
 }

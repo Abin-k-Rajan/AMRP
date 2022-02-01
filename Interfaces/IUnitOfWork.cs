@@ -4,7 +4,6 @@ namespace AMRP.Interfaces
 {
     public interface IUnitOfWork
     {
-        IEmployeeRepository EmployeeRepository {get; }
         IMovieRepository MovieRepository {get;}
         IActorInterface ActorRepository {get;}
         ICastInterface CastRepository {get;}

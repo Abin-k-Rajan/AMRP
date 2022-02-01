@@ -1,6 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using AMRP.Models;
-using AMRP.Dtos;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace AMRP.Data
 {
@@ -8,7 +8,6 @@ namespace AMRP.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) {}
 
-        public DbSet<Employee> Employees {get; set;}
         public DbSet<Movies> movies {get; set;}
         public DbSet<Actor> actors {get; set;}
         public DbSet<Cast> casts {get; set;}
@@ -18,5 +17,6 @@ namespace AMRP.Data
         public DbSet<User> user {get; set;}
         public DbSet<Writer> writer {get; set;}
         public DbSet<Crew> crew {get; set;}
+
     }
 }

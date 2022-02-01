@@ -6,9 +6,12 @@ namespace AMRP.Models
     {
         [Key]
         public int actorId {get; set;}
+        [Required]
+        [StringLength(maximumLength: 20)]
         public string name {get; set;}
+        [Required]
+        [StringLength(maximumLength:20)]
         public string designation {get; set;}
-        public string address {get; set;}
         public string mediaLink {get; set;}
         public string description {get; set;}
     }

@@ -30,7 +30,6 @@ namespace AMRP.Data.Repo
                     actorId = actor.actorId,
                     name = actor.name,
                     designation = actor.designation,
-                    address = actor.address,
                     mediaLink = actor.mediaLink,
                     description = cast.description,
                     character = cast.character

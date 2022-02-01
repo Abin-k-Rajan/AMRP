@@ -10,7 +10,6 @@ namespace AMRP.Data
         {
             this.dc = dc;
         }
-        public IEmployeeRepository EmployeeRepository => new EmployeeRepository(dc);
 
         public IMovieRepository MovieRepository => new MovieRepository(dc);
 
