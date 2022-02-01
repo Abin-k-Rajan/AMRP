@@ -14,7 +14,7 @@ const SearchBox = (props) => {
 		{
 			setUserName('Login')
 		}
-	}, [])
+	}, [localStorage.getItem('userName')])
 
 	const loginHandler = () => {
 		if (localStorage.getItem('token'))

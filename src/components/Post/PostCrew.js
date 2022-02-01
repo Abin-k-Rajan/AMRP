@@ -12,7 +12,6 @@ class PostCrew extends Component {
         this.state = {
             name: '',
             designation: '',
-            address: '',
             mediaLink: '',
             description: ''
         }
@@ -66,11 +65,6 @@ class PostCrew extends Component {
                         <label style={{"color": "black"}} className="form-label" for="designationX">Designation</label>
                     </div>
 
-
-                    <div className="form-floating form-white mb-4">
-                        <input name="address" type="text" id="addressX" className="form-control form-control-lg" placeholder="address" onChange={this.changeHandler} />
-                        <label style={{"color": "black"}} className="form-label" for="addressX">Address</label>
-                    </div>
 
                     <div className="form-floating form-white mb-4">
                         <input name="mediaLink" type="url" id="MediaX" className="form-control form-control-lg" placeholder="7788" onChange={this.changeHandler}/>

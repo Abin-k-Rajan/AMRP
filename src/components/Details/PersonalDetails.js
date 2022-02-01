@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Component } from "react/cjs/react.production.min";
 import { apiUrl } from "../../base";
 import MovieList from "../MovieList";
+import LoadingComponent from '../LoadingComponent';
 
 class PersonalDetails extends Component
 {
@@ -50,13 +51,16 @@ export default function(props){
     const {id} = useParams()
     const [person, setPerson] = useState('')
     const [movies, setMovies] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        setLoading(true)
         window.scrollTo(0, 0)
         fetch(props.designation === 'actor' ? `${apiUrl}${props.designation}/${id}` : `${apiUrl}crew/${props.designation}/${id}`)
             .then(res => res.json())
             .then((result) => {
                 setPerson(result)
+                setLoading(false)
             })
         fetch(`${apiUrl}crew/${props.designation}inmovies/${id}`)
             .then(res => res.json())
@@ -67,5 +71,5 @@ export default function(props){
     }, [])
 
 
-    return <PersonalDetails detail={person} movies={movies} designation={props.designation} />;
+    return <> { loading ? <LoadingComponent /> : <PersonalDetails detail={person} movies={movies} designation={props.designation} />} </>;
 };

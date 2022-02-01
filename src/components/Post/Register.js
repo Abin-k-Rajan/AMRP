@@ -10,7 +10,8 @@ class Register extends Component {
         this.state = {
             email: '',
             userName: '',
-            password: ''    
+            password: '',
+            loading: false
         }
     }
 
@@ -19,6 +20,7 @@ class Register extends Component {
     }
 
     submitHandler = () => {
+        this.setState({loading: true})
         axios.post(`${apiUrl}account/register`, this.state).then(res => {
             this.props.navigate('/login')
             alert(`User added`)
@@ -27,6 +29,7 @@ class Register extends Component {
                 alert('User already exist in the database')
             else
                 alert(`Trouble connecting to server, thank you for your patience`)
+                this.setState({loading: false})
         })
     }
 
@@ -67,7 +70,16 @@ class Register extends Component {
                     
 
                     <br></br>
-                    <button onClick={this.submitHandler} className="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
+                    <button onClick={this.submitHandler} className="btn btn-outline-light btn-lg px-5" type="submit">Register
+                    {this.state.loading ?
+                                    <div class="d-flex justify-content-center float-end mx-2">
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    </div> :
+                                    <div className="mx-2"></div>
+                        }
+                    </button>
                     </div>
 
                     

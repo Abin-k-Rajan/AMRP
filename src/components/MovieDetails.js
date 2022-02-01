@@ -6,6 +6,7 @@ import Cast from './Cast';
 import Character from './Characters';
 import Comment from './Comment';
 import ImageCarousel from './ImageCarousel';
+import LoadingComponent from './LoadingComponent';
 import PostComment from './Post/PostComment';
 import './Styles/MovieDetail.css'
 
@@ -22,8 +23,10 @@ const MovieDetail = (props) => {
     const [reviews, setReviews] = useState([])
     const [images, setImages] = useState([])
     const {id} = useParams()
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         window.scrollTo(0, 0)
         fetch(`${apiUrl}movie/${id}`)
             .then(res => res.json())
@@ -32,17 +35,20 @@ const MovieDetail = (props) => {
                 fetch(`${apiUrl}crew/crew/${result.crewId}`)
                     .then(res => res.json())
                     .then((result) => {
+                        setLoading(false)
                         fetch(`${apiUrl}crew/writer/${result.writerId}`).then(res => res.json()).then((result) => setWriter(result))
                         fetch(`${apiUrl}crew/producer/${result.producerId}`).then(res => res.json()).then((result) => setPoducer(result))
                         fetch(`${apiUrl}crew/director/${result.directorId}`).then(res => res.json()).then((result) => setDirector(result)) 
                         fetch(`${apiUrl}crew/cast/${result.crewId}`).then(res => res.json()).then((result) => {
                             setCast(result)
+                            setLoading(false)
                         })
                     })
                 client.search(result.movieName, options)
                 .then(res => {
                     setImages(res)
                 })
+                setImages(['1', '2']);
             }
         );
 
@@ -55,9 +61,18 @@ const MovieDetail = (props) => {
     }, [])
 
 
+    
+    useEffect(() => {
+        console.log('change')
+    }, [localStorage.getItem('comment-changed')])
+
+
 	return (
 		<>
-        
+            {
+                loading ? 
+                    <LoadingComponent /> :
+                    <>
             <div className='row'>
                 <div className='col-sm-4 m-5'>
                     <img className='img-fluid' src={detail.posterLink === '' ? NO_IMAGE_AVAILABLE : detail.posterLink} alt={`AMRP ${detail.movieName}`} />
@@ -101,15 +116,11 @@ const MovieDetail = (props) => {
             <h1 style={{"marginLeft": "20px", "marginBottom": "40px"}}>Comments</h1>
             <div className='container m-6'>
                 <div className='row'>
-                    <div className='col'>
                         <Comment id={id}/>  
-                    </div>
-                    <div className='col'>
-                        <PostComment id={id}/>
-                    </div>
                 </div>
             </div>
-
+            </>
+            }
 		</>
 	);
 };

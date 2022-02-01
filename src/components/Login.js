@@ -11,7 +11,8 @@ class Login extends Component
         super(props)
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            loading: false
         }
     }
 
@@ -20,17 +21,20 @@ class Login extends Component
     }
 
     submitHandler = (e) => {
+        this.setState({loading: true})
         axios.post(apiUrl + 'account/login', this.state).then(res => {
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('userName', res.data.userName)
             localStorage.setItem('userId', res.data.userId)
             this.props.navigate('/')
+            this.setState({loading: false})
             alert(`Welcome, ${res.data.userName}`)
         }).catch(err => {
             if (err.response.status === 401)
                 alert('Credentials do not match')
             else
                 alert(`Trouble connecting to server, thank you for your patience`)
+            this.setState({loading: false})
         })
     }
 
@@ -63,7 +67,16 @@ class Login extends Component
 
                     <p className="small mb-5 pb-lg-2"><a className="text-white-50" href="#!">Forgot password?</a></p>
 
-                    <button onClick={this.submitHandler} className="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                    <button onClick={this.submitHandler} className="btn btn-outline-light btn-lg px-5" type="submit">Login
+                        {this.state.loading ?
+                                    <div class="d-flex justify-content-center float-end mx-2">
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    </div> :
+                                    <div className="mx-2"></div>
+                        }
+                    </button>
                     </div>
 
                     <div>

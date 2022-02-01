@@ -8,7 +8,7 @@ class NavBar extends Component
     render() {
         return (
             <>
-                <div className='container-fluid movie-app sticky-top p-4 mt-2 nav-bar'>
+                <div className='container-fluid movie-app sticky-to p-4 mt-2 nav-ba'>
                 <div className='row d-flex align-items-center'>
                     <MovieListHeading heading='AMRP MOVIES' />
                     <SearchBox />

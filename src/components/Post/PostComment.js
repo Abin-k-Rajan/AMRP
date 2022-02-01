@@ -25,7 +25,8 @@ class PostComment extends Component
             'comment': this.state.comment,
             'rating': this.state.rating
         }).then(res => {
-            window.location.reload()
+            localStorage.setItem('comment-changed', JSON.stringify(this.state))
+            alert('change')
         }).catch(err => {
             alert(err)
         })

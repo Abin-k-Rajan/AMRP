@@ -22,6 +22,9 @@ const App = () => {
 		{
 		<Router>
 			<NavBar userName='login' />
+			{/* <div class="spinner-grow" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div> */}
 			<Routes>
 				<Route path='/' exact element={<Home />} />
 				<Route path='/detail/:id' exact element={<MovieDetail/>} />

@@ -11,14 +11,14 @@ function Footer(){
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h2>Project Link</h2>
-            <Link to='/sign-up'>AMRP REACT APP</Link>
-            <Link to='/'>AMRP ASP.NET</Link>
-            <Link to='/'>Custom Serach Engine</Link>
+            <a href="https://github.com/Abin-k-Rajan/AMRP/tree/React-App" target="_blank">AMRP REACT APP</a>
+            <a href="https://github.com/Abin-k-Rajan/AMRP/tree/Dotnet-Backend" target='_blank'>AMRP ASP.NET</a>
+            <a href="https://programmablesearchengine.google.com/cse/setup/basic?cx=6c1d57204d0f32abc" target='_blank'>Custom Serach Engine</a>
           </div>
           <div class='footer-link-items'>
             <h2>Contact Us</h2>
-            <Link to='/'>LinkedIn</Link>
-            <Link to='/'>LinkedIn</Link>
+            <a href="https://www.linkedin.com/in/abin-k-732a18136/" target='_blank'>LinkedIn</a>
+            <a href="#" target='_blank'>LinkedIn</a>
           </div>
         </div>
         
