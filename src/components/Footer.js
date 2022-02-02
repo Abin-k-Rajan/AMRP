@@ -5,10 +5,12 @@ import './Styles/Footer.css'
 
 function Footer(){
   const [generalCount, setGeneralCount] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch(`${apiUrl}crew/generalcount`).then(res => res.json()).then((result) => {
       console.log(result)
+      setLoading(false)
       setGeneralCount(result)
     })
   }, [])
@@ -31,9 +33,18 @@ function Footer(){
             <a href="https://www.linkedin.com/in/asprakash9/" target='_blank'>LinkedIn</a>
           </div>
           <div class='footer-link-items'>
-            {/* <h2>Page Details</h2>
-              <p>{generalCount[0].nomovies}   MOVIES | {generalCount[0].noactors} ACTORS</p>
-              <p>{generalCount[0].nowriters} WRITERS | {generalCount[0].nodirectors} DIRECTORS | {generalCount[0].nowriters} WRITERS</p> */}
+            <h2>Page Details</h2>
+            {
+              loading ? 
+              <p>Loading...</p> : 
+              generalCount.map((count, index) => (
+                <>
+                <p>{count.nomovies}   MOVIES | {count.noactors} ACTORS</p>
+                <p>{count.nowriters} WRITERS | {count.nodirectors} DIRECTORS | {count.nowriters} WRITERS</p>
+                </>
+              ))
+              
+            }
           </div>
         </div>
         
