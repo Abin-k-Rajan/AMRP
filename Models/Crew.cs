@@ -10,7 +10,7 @@ namespace AMRP.Models
         public int producerId {get; set;}
         public int writerId {get; set;}
         [Required]
-        [StringLength(maximumLength: 20)]
+        [StringLength(maximumLength: 50)]
         public string crewName {get; set;}
     }
 }

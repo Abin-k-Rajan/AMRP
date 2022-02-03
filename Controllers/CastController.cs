@@ -147,30 +147,63 @@ public class CrewController : BaseController
 
 
     [HttpGet("actorinmovies/{id}")]
-    public IActionResult GetMoviesByActorId(int id)
+    public async Task<IActionResult> GetMoviesByActorId(int id)
     {
-        var res = uow.CastRepository.GetMoviesForActor(id);
+        var res = await uow.CastRepository.GetMoviesForActor(id);
         return Ok(res);
     }
 
     [HttpGet("directorinmovies/{id}")]
-    public IActionResult GetMoviesByDirectorId(int id)
+    public async Task<IActionResult> GetMoviesByDirectorId(int id)
     {
-        var res = uow.CastRepository.GetMoviesForDirector(id);
+        var res = await uow.CastRepository.GetMoviesForDirector(id);
         return Ok(res);
     }
 
     [HttpGet("producerinmovies/{id}")]
-    public IActionResult GetMoviesByProducerId(int id)
+    public async Task<IActionResult> GetMoviesByProducerId(int id)
     {
-        var res = uow.CastRepository.GetMoviesForProducer(id);
+        var res = await uow.CastRepository.GetMoviesForProducer(id);
         return Ok(res);
     }
 
     [HttpGet("writerinmovies/{id}")]
-    public IActionResult GetMoviesByWriterId(int id)
+    public async Task<IActionResult> GetMoviesByWriterId(int id)
     {
-        var res = uow.CastRepository.GetMoviesForWriter(id);
+        var res = await uow.CastRepository.GetMoviesForWriter(id);
+        return Ok(res);
+    }
+
+
+    [HttpGet("generalcount")]
+    public async Task<IActionResult> GetGeneralCount(int id)
+    {
+        var res = await uow.CastRepository.GetGeneralCount();
+        return Ok(res);
+    }
+
+    [HttpGet("getallactors")]
+    public async Task<IActionResult> GetAllActors()
+    {
+        var res = await uow.ActorRepository.GetActorAsync();
+        return Ok(res);
+    }
+    [HttpGet("getallproducers")]
+    public async Task<IActionResult> GetAllProducers()
+    {
+        var res = await uow.ProducerRepository.GetProducerAsync();
+        return Ok(res);
+    }
+    [HttpGet("getalldirectors")]
+    public async Task<IActionResult> GetAllDirectors()
+    {
+        var res = await uow.DirectorRepository.GetDirectorAsync();
+        return Ok(res);
+    }
+    [HttpGet("getallwriters")]
+    public async Task<IActionResult> GetAllWriters()
+    {
+        var res = await uow.WriterInterface.GetWriterAsync();
         return Ok(res);
     }
 }

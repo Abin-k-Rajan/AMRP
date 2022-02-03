@@ -10,7 +10,7 @@ namespace AMRP.Models
         public int actorId {get; set;}
         public string description {get; set;}
         [Required]
-        [StringLength(maximumLength: 20)]
+        [StringLength(maximumLength: 50)]
         public string character {get; set;}
     }
 }

@@ -5,3 +5,4 @@
 .env
 /obj
 .commands
+env.list

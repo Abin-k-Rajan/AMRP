@@ -17,6 +17,7 @@ namespace AMRP.Data
         public DbSet<User> user {get; set;}
         public DbSet<Writer> writer {get; set;}
         public DbSet<Crew> crew {get; set;}
+        public DbSet<GeneralCount> GENERALCOUNT {get; set;}
 
     }
 }

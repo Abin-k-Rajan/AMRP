@@ -49,35 +49,32 @@ namespace AMRP.Data.Repo
             return await dc.casts.Where(x => x.crewId == crewId).ToListAsync();
         }
 
-        private List<Movies> GetMoviesForCrew(List<int> crew)
-        {
-            return dc.movies.Where(x => crew.Contains(x.crewId)).ToList();
-        }
-
 
         /// HAVE TO MAKE THIS AN ASYNC FUNCTION 
-        public IEnumerable<Movies> GetMoviesForActor(int actorId)
+        //  USING SQL STORED PROCEDURE TO 
+        public async Task<IEnumerable<Movies>> GetMoviesForActor(int actorId)
         {
-            var list = dc.casts.Where(x => x.actorId == actorId).Select(m => m.crewId).Distinct().ToList();
-            return GetMoviesForCrew(list);
+            return await dc.movies.FromSqlInterpolated($"CALL GETMOVIESFORACTORID({actorId});").ToListAsync();
         }
 
-        public IEnumerable<Movies> GetMoviesForDirector(int directorId)
+        public async Task<IEnumerable<Movies>> GetMoviesForDirector(int directorId)
         {
-            var list = dc.crew.Where(x => x.directorId == directorId).Select(m => m.crewId).ToList();
-            return GetMoviesForCrew(list);
+            return await dc.movies.FromSqlInterpolated($"CALL GETMOVIESFORDIRECTORID({directorId});").ToListAsync();
         }
 
-        public IEnumerable<Movies> GetMoviesForProducer(int producerId)
+        public async Task<IEnumerable<Movies>> GetMoviesForProducer(int producerId)
         {
-            var list = dc.crew.Where(x => x.producerId == producerId).Select(m => m.crewId).ToList();
-            return GetMoviesForCrew(list);
+            return await dc.movies.FromSqlInterpolated($"CALL GETMOVIESFORPRODUCERID({producerId});").ToListAsync();
         }
 
-        public IEnumerable<Movies> GetMoviesForWriter(int writerId)
+        public async Task<IEnumerable<Movies>> GetMoviesForWriter(int writerId)
         {
-            var list = dc.crew.Where(x => x.writerId == writerId).Select(m => m.crewId).ToList();
-            return GetMoviesForCrew(list);
+            return await dc.movies.FromSqlInterpolated($"CALL GETMOVIESFORWRITERID({writerId});").ToListAsync();
+        }
+
+        public async Task<IEnumerable<GeneralCount>> GetGeneralCount()
+        {
+            return await dc.GENERALCOUNT.FromSqlInterpolated($"CALL SELECTGENERALCOUNT() ;").ToListAsync();
         }
     }
 }

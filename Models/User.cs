@@ -10,10 +10,9 @@ namespace AMRP.Models
         [StringLength(maximumLength: 50)]
         public string email {get; set;}
         [Required]
-        [StringLength(maximumLength: 20)]
+        [StringLength(maximumLength: 50)]
         public string name {get; set;}
         [Required]
-        [StringLength(maximumLength: 20)]
         public byte[] password {get; set;}
         public byte[] passwordKey {get; set;}
 

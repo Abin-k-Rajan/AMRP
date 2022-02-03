@@ -9,9 +9,10 @@ namespace AMRP.Interfaces
         void AddCast(Cast cast);
         Task<IEnumerable<Cast>> GetCastFromCrewId(int crewId);
         Task<IEnumerable<object>> GetCastAndActorFromCrewId(int crewId);
-        IEnumerable<Movies> GetMoviesForActor(int actorId);
-        IEnumerable<Movies> GetMoviesForDirector(int directorId);
-        IEnumerable<Movies> GetMoviesForProducer(int producerId);
-        IEnumerable<Movies> GetMoviesForWriter(int writerId);
+        Task<IEnumerable<Movies>> GetMoviesForActor(int actorId);
+        Task<IEnumerable<Movies>> GetMoviesForDirector(int directorId);
+        Task<IEnumerable<Movies>> GetMoviesForProducer(int producerId);
+        Task<IEnumerable<Movies>> GetMoviesForWriter(int writerId);
+        Task<IEnumerable<GeneralCount>> GetGeneralCount();
     }
 }
