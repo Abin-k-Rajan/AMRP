@@ -74,12 +74,12 @@ const MovieDetail = (props) => {
                     <LoadingComponent /> :
                     <>
             <div className='row'>
-                <div className='col-sm-4 m-5'>
+                <div className='col-sm-4 p-5'>
                     <img className='img-fluid' src={detail.posterLink === '' ? NO_IMAGE_AVAILABLE : detail.posterLink} alt={`AMRP ${detail.movieName}`} />
                     <ImageCarousel images={images} />
                 </div>
-                <div className='col-sm-6'>
-                    <div className='my-5'>
+                <div className='col-sm-8'>
+                    <div className='p-5'>
                     <h1>{detail.movieName}</h1>
                     <h2>{detail.genre}</h2>
                     <h2>{detail.year}</h2>

@@ -44,7 +44,7 @@ class PostCrew extends Component {
     render() {
     return (
         <>
-            <div className="col-sm-5 m-4">
+            <div className="col-sm-5 p-4">
                 <div className="card bg-dark text-white" style={{borderRadius: '1rem'}}>
                 <div className="card-body p-5 text-center">
 

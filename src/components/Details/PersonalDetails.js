@@ -18,11 +18,11 @@ class PersonalDetails extends Component
             <>
         
                 <div className='row'>
-                    <div className='col-sm-4 m-5'>
+                    <div className='col-sm-4 p-5'>
                         <img className='img-fluid' src={this.props.detail.mediaLink === '' ? 'https://t3.ftcdn.net/jpg/01/84/81/64/360_F_184816468_sXO2m7Xhy2xqENls5YxrKlmFg3Ii82Mr.jpg' : this.props.detail.mediaLink} alt={'movie'} />
                     </div>
-                    <div className="col-sm-7">
-                        <div className='my-5'>
+                    <div className="col-sm-8 p-5">
+                        <div className=''>
                         <h2>{this.props.detail.name}</h2>
                         <h5>{this.props.detail.designation}</h5>
                         <p>{this.props.detail.description}</p>
