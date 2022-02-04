@@ -14,6 +14,7 @@ import PostCast from './components/Post/PostCast';
 import Post from './components/Post/Post';
 import PersonalDetails from './components/Details/PersonalDetails';
 import Footer from './components/Footer';
+import ListPersonalDetails from './components/Details/ListPersonalDetails';
 
 const App = () => {
 
@@ -35,6 +36,10 @@ const App = () => {
 				<Route path='/director/:id' exact element={<PersonalDetails designation='director' />} />
 				<Route path='/producer/:id' exact element={<PersonalDetails designation='producer' />} />
 				<Route path='/writer/:id' exact element={<PersonalDetails designation='writer' />} />
+				<Route path='/actors' exact element={<ListPersonalDetails designation='actor'/>} />
+				<Route path='/directors' exact element={<ListPersonalDetails designation='director' />} />
+				<Route path='/producers' exact element={<ListPersonalDetails designation='producer' />} />
+				<Route path='/writers' exact element={<ListPersonalDetails designation='writer' />} />
 			</Routes>
 			<div style={{"height": "100px"}}></div>
 			<Footer />

@@ -51,7 +51,7 @@ const SearchBox = (props) => {
 
 	return (
 		<>
-		<div className='col col-sm-4 '>
+		<div className='col'>
 			<div className='form-floating'>
 			<input
 				onChange={searchHandler}
@@ -62,10 +62,10 @@ const SearchBox = (props) => {
 			<label style={{"color": "black"}} className="form-label" for="typeEmailX">Type to search</label>
 			</div>
 		</div>
-		<div className='col col-sm-4 float-end'>
+		<div className='col float-end'>
 			<div>
 			<button onClick={loginHandler} className="btn btn-outline-light btn-sm px-5 float-end mx-5" type="submit">{userName}</button>
-			<Link className='float-end image-container' to={`/post`} style={{"textDecoration": "none", "color": "white"}}>
+			<Link className='float-end hover-underline-animation' to={`/post`} style={{"textDecoration": "none", "color": "white"}}>
 				Post
 			</Link>
 			</div>
