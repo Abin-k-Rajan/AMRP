@@ -9,24 +9,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 var builder = WebApplication.CreateBuilder(args);
-var env = builder.Build().Environment;
 
-//var connectionString = (String?)null;
 // Add services to the container.
-// if (env.IsProduction())
-// {
-//     connectionString = builder.Configuration.GetConnectionString("Deploy");
-// }
-// else
-// {
-//     connectionString = builder.Configuration.GetConnectionString("Default");
-// }
-var connectionString = builder.Configuration.GetConnectionString("Default");
+var connectionString = builder.Configuration.GetConnectionString("Deploy");
 builder.Services.AddDbContext<DataContext>(options => 
 {
-    // if (env.IsProduction()) options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-    // else 
-        options.UseSqlServer(connectionString);
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -48,6 +36,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 
 //app.ConfigureExceptionHandler(app.Environment);
