@@ -5,9 +5,11 @@ import { apiUrl, GOOGLE_CUSTOM_SEARCH_API_KEY, GOOGLE_CUSTOM_SEARCH_ENGINE, NO_I
 import Cast from './Cast';
 import Character from './Characters';
 import Comment from './Comment';
+import Comments from './Comments';
 import ImageCarousel from './ImageCarousel';
 import LoadingComponent from './LoadingComponent';
 import PostComment from './Post/PostComment';
+import Rating from './Rating';
 import './Styles/MovieDetail.css'
 
 
@@ -48,7 +50,7 @@ const MovieDetail = (props) => {
                 .then(res => {
                     setImages(res)
                 })
-                setImages(['1', '2']);
+                //setImages(['1', '2']);
             }
         );
 
@@ -111,12 +113,9 @@ const MovieDetail = (props) => {
                 </div>
             </div>
 
-            
-            
-            <h1 style={{"marginLeft": "20px", "marginBottom": "40px"}}>Comments</h1>
             <div className='container m-6'>
                 <div className='row'>
-                        <Comment id={id}/>  
+                        <Comments id={id} />
                 </div>
             </div>
             </>

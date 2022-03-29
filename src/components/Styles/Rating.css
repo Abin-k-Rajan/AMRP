@@ -1,0 +1,48 @@
+.badge {
+    font-size: 25px;
+    font-weight: 200
+}
+
+.badge i {
+    font-size: 20px;
+    font-weight: 200
+}
+
+.about-rating {
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 10px
+}
+
+.total-ratings {
+    font-size: 12px
+}
+
+.bg-custom {
+    background-color: #b7dd29 !important
+}
+
+.progress {
+    margin-top: 10px
+}
+
+
+.rating-panel {
+    background-color: #2c2c2c;;
+}
+
+
+.btn:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+
+.refresh-button:hover {
+    animation: rotate 2s infinite;
+}
+
+@keyframes rotate {
+    50% {transform: rotate(180deg);}
+    100% {transform: rotate(360deg);}
+}

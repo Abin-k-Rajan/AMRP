@@ -13,3 +13,19 @@
 .del-button-show {
     color: blue;
 }
+
+.checked {
+    color: orange;
+}
+
+.stars {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.5);
+}
+
+.stars:hover {
+    cursor: pointer;
+    color: rgba(181, 255, 85, 1);
+    box-shadow: 0 5px 15px rgba(143, 207, 100, 0.4);
+    transform: scale(2);
+}

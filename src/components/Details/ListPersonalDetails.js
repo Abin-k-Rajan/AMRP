@@ -41,18 +41,11 @@ export default function(prop){
 
     useEffect(() => {
         setLoading(true)
-        if (localStorage.getItem(`${prop.designation}s`))
-        {
-            setDetails(JSON.parse(localStorage.getItem(`${prop.designation}s`)))
-            setLoading(false)
-        }
-        else {
             fetch(`${apiUrl}crew/getall${prop.designation}s`).then(res => res.json()).then((result) => {
                 setDetails(result)
                 localStorage.setItem(`${prop.designation}s`, JSON.stringify(result));
                 setLoading(false)
             })
-        }
     }, [prop.designation])
 
     return (
