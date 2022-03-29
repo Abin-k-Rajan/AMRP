@@ -5,17 +5,28 @@ using AMRP.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("Deploy");
-builder.Services.AddDbContext<DataContext>(options => 
+var connectionString = builder.Configuration.GetConnectionString("Default");
+
+if (builder.Environment.IsDevelopment())
 {
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-});
+    builder.Services.AddDbContext<DataContext>(options => 
+    {
+        options.UseSqlServer(connectionString);
+    });
+}
+else
+{
+    connectionString = Environment.GetEnvironmentVariable("ASPNET_DBCONNECTION");
+    builder.Services.AddDbContext<DataContext>(options => 
+    {
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    });
+}
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -36,8 +47,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 
 //app.ConfigureExceptionHandler(app.Environment);
 app.UseMiddleware<ExceptionMiddleware>();

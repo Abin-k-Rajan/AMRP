@@ -1,6 +1,7 @@
 /bin
 /.vscode
 /Migrations
+/Migrations-dev
 
 .env
 /obj

@@ -2,17 +2,21 @@ using Microsoft.AspNetCore.Mvc;
 using AMRP.Data;
 using AMRP.Interfaces;
 using AMRP.Models;
+using AMRP.Dtos;
 using AutoMapper;
+using AMRP.Middlewares;
 
 namespace AMRP.Controllers;
 
 public class ReviewController : BaseController
 {
     private readonly IUnitOfWork uow;
+    private readonly RatingMiddleware ratingMiddleware;
 
     public ReviewController(IUnitOfWork uow)
     {
         this.uow = uow;
+        this.ratingMiddleware = new RatingMiddleware();
     }
 
     [HttpGet("{movieId}")]
@@ -37,23 +41,23 @@ public class ReviewController : BaseController
     }
 
 
-    [HttpPut]
-    public async Task<IActionResult> UpdateReview(Review review)
-    {
-        var rvw = await uow.ReviewRepository.GetReview(review.userId, review.movieId);
-        if (rvw == null)
-        {
-            uow.ReviewRepository.PostReview(review);
-        }
-        else
-        {
-            rvw.comment = review.comment;
-            rvw.rating = review.rating;
-            rvw.LastUpdatedOn = DateTime.Now;
-        }
-        await uow.SaveAsync();
-        return Ok(review);
-    }
+    // [HttpPut]
+    // public async Task<IActionResult> UpdateReview(Review review)
+    // {
+    //     var rvw = await uow.ReviewRepository.GetReview(review.userId, review.movieId);
+    //     if (rvw == null)
+    //     {
+    //         uow.ReviewRepository.PostReview(review);
+    //     }
+    //     else
+    //     {
+    //         rvw.comment = review.comment;
+    //         rvw.rating = review.rating;
+    //         rvw.LastUpdatedOn = DateTime.Now;
+    //     }
+    //     await uow.SaveAsync();
+    //     return Ok(review);
+    // }
 
     [HttpGet("check/{userId}/{movieId}")]
     public async Task<IActionResult> GetReviewFromUserIdAndMovieId(int userId, int movieId)
@@ -64,6 +68,32 @@ public class ReviewController : BaseController
             return NotFound();
         }
         return Ok();
+    }
+
+
+    [HttpGet("rating/{movieId}")]
+    public async Task<IActionResult> GetRating(int movieId)
+    {
+        var ratings = await uow.ReviewRepository.GetRatingInfo(movieId);
+
+        RatingDto res = this.ratingMiddleware.getRatingDtoFromIEnumerable(ratings);
+        if (res == null)
+        {
+            return NotFound();
+        }
+        return Ok(res);
+    }
+
+    [HttpGet("ratinginfo/{movieId}")]
+    public async Task<IActionResult> GetRatingInfo(int movieId)
+    {
+        var ratings = await uow.ReviewRepository.GetAvgCountRatingInfor(movieId);
+        RatingInfo res = this.ratingMiddleware.getRatingInfoFromIEnumerable(ratings);
+        if (res == null)
+        {
+            return NotFound();
+        }
+        return Ok(res);
     }
 
 

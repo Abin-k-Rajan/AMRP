@@ -1,5 +1,5 @@
 using AMRP.Models;
-using AMRP.Models;
+using AMRP.Dtos;
 
 namespace AMRP.Interfaces
 {
@@ -12,5 +12,8 @@ namespace AMRP.Interfaces
         Task<Review> GetReview(int userId, int movieId);
         Task<Review> GetReviewFromReviewId(int reviewId, int userId);
         void RemoveReview(Review review);
+
+        Task<IEnumerable<Rating>> GetRatingInfo(int movieId);
+        Task<IEnumerable<RatingInfo>> GetAvgCountRatingInfor(int movieId);
     }
 }

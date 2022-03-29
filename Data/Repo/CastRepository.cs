@@ -9,9 +9,11 @@ namespace AMRP.Data.Repo
     public class CastRepository : ICastInterface
     {
         private readonly DataContext dc;
+        private bool prodEnv = true;
         public CastRepository(DataContext dc)
         {
             this.dc = dc;
+            prodEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production" ? true : false;
         }
 
         public void AddCast(Cast cast)
@@ -54,27 +56,47 @@ namespace AMRP.Data.Repo
         //  USING SQL STORED PROCEDURE TO 
         public async Task<IEnumerable<Movies>> GetMoviesForActor(int actorId)
         {
+            if (!prodEnv)
+            {
+                return await dc.movies.FromSqlInterpolated($"EXEC GETMOVIESFORACTORID @actorId = {actorId};").ToListAsync();    
+            }
             return await dc.movies.FromSqlInterpolated($"CALL GETMOVIESFORACTORID({actorId});").ToListAsync();
         }
 
         public async Task<IEnumerable<Movies>> GetMoviesForDirector(int directorId)
         {
+            if (!prodEnv)
+            {
+                return await dc.movies.FromSqlInterpolated($"EXEC GETMOVIESFORDIRECTORID @directorId = {directorId};").ToListAsync();
+            }
             return await dc.movies.FromSqlInterpolated($"CALL GETMOVIESFORDIRECTORID({directorId});").ToListAsync();
         }
 
         public async Task<IEnumerable<Movies>> GetMoviesForProducer(int producerId)
         {
+            if (!prodEnv)
+            {
+                return await dc.movies.FromSqlInterpolated($"EXEC GETMOVIESFORPRODUCERID @producerId = {producerId};").ToListAsync();
+            }
             return await dc.movies.FromSqlInterpolated($"CALL GETMOVIESFORPRODUCERID({producerId});").ToListAsync();
         }
 
         public async Task<IEnumerable<Movies>> GetMoviesForWriter(int writerId)
         {
+            if (!prodEnv)
+            {
+                return await dc.movies.FromSqlInterpolated($"EXEC GETMOVIESFORWRITERID @writerId = {writerId};").ToListAsync();
+            }
             return await dc.movies.FromSqlInterpolated($"CALL GETMOVIESFORWRITERID({writerId});").ToListAsync();
         }
 
         public async Task<IEnumerable<GeneralCount>> GetGeneralCount()
         {
-            return await dc.GENERALCOUNT.FromSqlInterpolated($"CALL SELECTGENERALCOUNT() ;").ToListAsync();
+            if (!prodEnv)
+            {
+                return await dc.GENERALCOUNT.FromSqlInterpolated($"EXEC SELECTGENERALCOUNT;").ToListAsync();
+            }
+            return await dc.GENERALCOUNT.FromSqlInterpolated($"CALL SELECTGENERALCOUNT();").ToListAsync();
         }
     }
 }

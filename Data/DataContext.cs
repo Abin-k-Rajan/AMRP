@@ -19,5 +19,8 @@ namespace AMRP.Data
         public DbSet<Crew> crew {get; set;}
         public DbSet<GeneralCount> GENERALCOUNT {get; set;}
 
+        public DbSet<Rating> ratings {get; set;}
+        public DbSet<RatingInfo> ratingInfos {get; set;}
+
     }
 }

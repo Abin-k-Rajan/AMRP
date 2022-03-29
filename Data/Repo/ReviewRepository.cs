@@ -1,6 +1,7 @@
 using AMRP.Models;
 using AMRP.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using AMRP.Dtos;
 
 namespace AMRP.Data.Repo
 {
@@ -47,6 +48,16 @@ namespace AMRP.Data.Repo
         public void RemoveReview(Review review)
         {
             dc.review.Remove(review);
+        }
+
+        public async Task<IEnumerable<Rating>> GetRatingInfo(int movieId)
+        {
+            return await dc.ratings.FromSqlInterpolated($"EXEC GETRATINGFORMOVIE @Id = {movieId};").ToListAsync();
+        }
+
+        public async Task<IEnumerable<RatingInfo>> GetAvgCountRatingInfor(int movieId)
+        {
+            return await dc.ratingInfos.FromSqlInterpolated($"EXEC GETAVGCOUNTRATING @Id = {movieId};").ToListAsync();
         }
     }
 }
